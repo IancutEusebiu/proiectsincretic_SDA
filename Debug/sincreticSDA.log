@@ -1,4 +1,0 @@
-﻿  Source.c
-c:\users\iancu\onedrive\desktop\anul 2,sem 2\sincreticsda\sincreticsda\source.c(16): warning C4013: 'time' undefined; assuming extern returning int
-c:\users\iancu\onedrive\desktop\anul 2,sem 2\sincreticsda\sincreticsda\source.c(35): warning C4013: 'getch' undefined; assuming extern returning int
-  sincreticSDA.vcxproj -> C:\Users\iancu\OneDrive\Desktop\Anul 2,sem 2\sincreticSDA\Debug\sincreticSDA.exe
