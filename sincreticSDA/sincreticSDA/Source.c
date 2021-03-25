@@ -1,10 +1,13 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
+
+ 
 int  main()
 {
 	int A[100][100];
 	int M, N, i, j;
 	int suma;
+	int minim_sub_dp =INT_MAX;
 	time_t t;
 	printf("Numarul de linii ale matricei : ");
 	scanf("%d", &M);
@@ -15,25 +18,23 @@ int  main()
 	// generarea valorilor din matrice:
 	srand((unsigned)time(&t));
 
-	 
 	for (i = 0; i < M; i++)
 		for (j = 0; j < N; j++)
 			A[i][j] = rand() % 100;
-			 
 
-	// afisarea matricei:
 	printf("\n\nMatricea generata este:\n");
-	for (int i = 0; i < M; i++)
+	for (i = 0; i < M; i++)
 	{
-		for (int j = 0; j < N; j++)
+		for (j = 0; j < N; j++)
 
 			printf("%5d", A[i][j]);
-		printf("\n");
+		    printf("\n");
+			printf("\n");
 	}
 	printf("\n");
 	printf("Apasa o tasta pentru a continua!\n");
 	getch();
-	
+
 	int opt;
 	do
 	{
@@ -63,9 +64,18 @@ int  main()
 				for (i = 0; i < M; i++)
 					suma += A[i][i];
 				
-					printf("Suma elementelor de pe diagonala principala este:%d", suma);
+					printf("Suma elementelor de pe diagonala principala este:%d\n", suma);
+					printf("\n");
+					printf("Matricea:\n");
+					for (i = 0; i < M; i++)
+					{
+						for (j = 0; j < N; j++)
+
+							printf("%5d", A[i][j]);
+						    printf("\n");
+						    printf("\n");
+					}
 					getch();
-				
 			}
 			break;
 		case 2:  
@@ -75,14 +85,7 @@ int  main()
 				getch();
 			}
 
-			if (M == N)
-			{
-				suma = 0;
-				if (M != N)
-			{
-				printf("Introduceti o matrice patratica!");
-				getch();
-			}
+			 
 
 			if (M == N)
 			{
@@ -94,13 +97,47 @@ int  main()
 				
 			}
 
-				printf("Suma elementelor de pe diagonala principala este:%d", suma);
-				getch();
+				printf("Suma elementelor de pe diagonala secundara este:%d\n", suma);
+				printf("\n");
+				printf("Matricea:\n");
+				for (i = 0; i < M; i++)
+				{
+					for (j = 0; j < N; j++)
 
-			}
+						printf("%5d", A[i][j]);
+					    printf("\n");
+						printf("\n");
+				}
+				getch();
+				 
+
+			
 			break;
 		case 3:  
-			 
+			printf("Elementele de sub diagonala principala sunt:");
+			for (int i = 0; i < M; i++)
+				for (int j = 0; j < N; j++)
+				{
+					if (i > j) // Sub diagonala principala
+					{
+						printf("%d ", A[i][j]);
+						if (A[i][j] < minim_sub_dp)
+							minim_sub_dp = A[i][j];
+					}
+				}
+			printf("\nMinimul este:%d\n", minim_sub_dp);
+			
+			
+			printf("\nMatricea:\n");
+			for (i = 0; i < M; i++)
+			{
+				for (j = 0; j < N; j++)
+
+					printf("%5d ", A[i][j]);
+				    printf("\n");
+					printf("\n");
+			}
+			getch();
 			break;
 		case 4: printf("\nProgram realizat de Iancut Eusebiu Sebastian");
 			 
@@ -115,6 +152,7 @@ int  main()
 		case 7: exit(0);
 		default: printf("\nOptiune invalida!");
 		}
-	} while (1);
+	} while (1);
+
 	return 0;
 }
