@@ -5,15 +5,18 @@
 int  main()
 {
 	printf("\nProgram realizat de Iancut Eusebiu Sebastian\n");
+	printf("\n");
 	int A[100][100];
 	int M, N, i, j;
 	int suma;
 	int minim_sub_dp =INT_MAX;
+	int min_sub_se = INT_MAX;
 	int max_sub_dp = INT_MIN;
+	int max_sub_se = INT_MIN;
 	time_t t;
-	printf("Numarul de linii ale matricei : ");
+	printf("Numarul de linii : ");
 	scanf("%d", &M);
-	printf("Numarul de coloane ale matricei : ");
+	printf("Numarul de coloane : ");
 	scanf("%d", &N);
 	 
 
@@ -168,10 +171,56 @@ int  main()
 			getch();
 			break;
 		case 5:
+			printf("Elementele de sub diagonala secundara sunt:");
+			for (int i = 0; i < M; i++)
+				for (int j = 0; j < N; j++)
+				{
+					if (i + j > M - 1) // Sub diagonala secundara
+					{
+						printf("%d ", A[i][j]);
+						if (A[i][j] < min_sub_se)
+							min_sub_se = A[i][j];
+					}
+				}
+			printf("\nMinimul este:%d\n", min_sub_se);
 
+
+			printf("\nMatricea:\n");
+			for (i = 0; i < M; i++)
+			{
+				for (j = 0; j < N; j++)
+
+					printf("%5d ", A[i][j]);
+				printf("\n");
+				printf("\n");
+			}
+			getch();
 			break;
 		case 6:
+			printf("Elementele de sub diagonala principala sunt:");
+			for (int i = 0; i < M; i++)
+				for (int j = 0; j < N; j++)
+				{
+					if (i + j > M - 1) // Sub diagonala secundara
+					{
+						printf("%d ", A[i][j]);
+						if (A[i][j] > max_sub_se)
+							max_sub_se = A[i][j];
+					}
+				}
+			printf("\nMaximul este:%d\n", max_sub_se);
 
+
+			printf("\nMatricea:\n");
+			for (i = 0; i < M; i++)
+			{
+				for (j = 0; j < N; j++)
+
+					printf("%5d ", A[i][j]);
+				printf("\n");
+				printf("\n");
+			}
+			getch();
 			break;
 		 
 		case 7: exit(0);
