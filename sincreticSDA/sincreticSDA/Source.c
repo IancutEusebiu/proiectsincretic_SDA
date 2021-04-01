@@ -4,10 +4,12 @@
  
 int  main()
 {
+	printf("\nProgram realizat de Iancut Eusebiu Sebastian\n");
 	int A[100][100];
 	int M, N, i, j;
 	int suma;
 	int minim_sub_dp =INT_MAX;
+	int max_sub_dp = INT_MIN;
 	time_t t;
 	printf("Numarul de linii ale matricei : ");
 	scanf("%d", &M);
@@ -118,7 +120,7 @@ int  main()
 			for (int i = 0; i < M; i++)
 				for (int j = 0; j < N; j++)
 				{
-					if (i > j) // Sub diagonala principala
+					if (i >j) // Sub diagonala principala
 					{
 						printf("%d ", A[i][j]);
 						if (A[i][j] < minim_sub_dp)
@@ -139,8 +141,31 @@ int  main()
 			}
 			getch();
 			break;
-		case 4: printf("\nProgram realizat de Iancut Eusebiu Sebastian");
-			 
+		case 4: 
+			printf("Elementele de sub diagonala principala sunt:");
+			for (int i = 0; i < M; i++)
+				for (int j = 0; j < N; j++)
+				{
+					if (i > j) // Sub diagonala principala
+					{
+						printf("%d ", A[i][j]);
+						if (A[i][j] > max_sub_dp)
+							max_sub_dp = A[i][j];
+					}
+				}
+			printf("\nMaximul este:%d\n", max_sub_dp);
+
+
+			printf("\nMatricea:\n");
+			for (i = 0; i < M; i++)
+			{
+				for (j = 0; j < N; j++)
+
+					printf("%5d ", A[i][j]);
+				printf("\n");
+				printf("\n");
+			}
+			getch();
 			break;
 		case 5:
 
