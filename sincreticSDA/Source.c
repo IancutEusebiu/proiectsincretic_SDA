@@ -115,6 +115,7 @@ int  main()
 		case 7: exit(0);
 		default: printf("\nOptiune invalida!");
 		}
-	} while (1);
+	} while (1);
+
 	return 0;
 }
