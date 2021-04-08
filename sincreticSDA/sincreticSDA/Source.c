@@ -197,7 +197,7 @@ int  main()
 			getch();
 			break;
 		case 6:
-			printf("Elementele de sub diagonala principala sunt:");
+			printf("Elementele de sub diagonala secundara sunt:");
 			for (int i = 0; i < M; i++)
 				for (int j = 0; j < N; j++)
 				{
