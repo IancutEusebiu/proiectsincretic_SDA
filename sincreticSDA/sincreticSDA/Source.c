@@ -25,7 +25,7 @@ int  main()
 
 	for (i = 0; i < M; i++)
 		for (j = 0; j < N; j++)
-			A[i][j] = rand() % 100;
+			A[i][j] = rand() % 1000;
 
 	printf("\n\nMatricea generata este:\n");
 	for (i = 0; i < M; i++)
