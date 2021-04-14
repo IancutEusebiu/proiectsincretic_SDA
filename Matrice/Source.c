@@ -66,7 +66,9 @@ int  main()
 			{
 				suma = 0;
 				for (i = 0; i < M; i++)
-					suma += A[i][i];
+					 
+
+					suma =suma+ A[i][i];
 
 				printf("Suma elementelor de pe diagonala principala este:%d\n", suma);
 				printf("\n");
