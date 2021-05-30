@@ -1,4 +1,5 @@
 ﻿  Source.c
-c:\users\iancu\onedrive\desktop\ps_sda\proiectsincretic_sda\matrice\source.c(23): warning C4013: 'time' undefined; assuming extern returning int
-c:\users\iancu\onedrive\desktop\ps_sda\proiectsincretic_sda\matrice\source.c(40): warning C4013: 'getch' undefined; assuming extern returning int
+c:\users\iancu\onedrive\desktop\ps_sda\proiectsincretic_sda\matrice\source.c(11): warning C4013: 'getch' undefined; assuming extern returning int
+c:\users\iancu\onedrive\desktop\ps_sda\proiectsincretic_sda\matrice\source.c(92): warning C4013: 'time' undefined; assuming extern returning int
+c:\users\iancu\onedrive\desktop\ps_sda\proiectsincretic_sda\matrice\source.c(16): warning C4715: 'verificare': not all control paths return a value
   Matrice.vcxproj -> C:\Users\iancu\OneDrive\Desktop\PS_SDA\proiectsincretic_SDA\x64\Debug\Matrice.exe
