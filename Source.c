@@ -1,23 +1,86 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 
+ 
+int verificare(int M,int N) {
+	
+	if (M != N)
+	{
+		printf("Numarul de linii trebuie sa fie egal cu nr de coloane!");
 
+		getch();
+		exit(0);
+	}
+}
+
+int suma_diag(int M,int B[100][100],int y)
+{
+	int x = M;
+	int suma = 0;
+	for (int i = 0; i < x; i++)
+	{
+		if (y == 1)
+			suma = suma + B[i][i];
+		if (y == 2)
+			suma = suma + B[i][M - i - 1];
+	}
+	return suma;
+}
+int min_sub_dp_sec(int M,int N, int B[100][100],int y)
+{
+	int min=INT_MAX;
+	 
+	for (int i = 0; i < M; i++)
+		for (int j = 0; j < N; j++)
+		{
+			if (i > j && y==3) // Sub diagonala principala
+			{
+				if (B[i][j] < min)
+					min = B[i][j];
+			}
+			if (i + j > M - 1 && y==5) // Sub diagonala secundara
+			{
+				if (B[i][j] < min)
+					min= B[i][j];
+			}
+		}
+	return min;
+}
+int max_sub_dp_sec(int M, int N, int B[100][100], int y)
+{
+	int max = INT_MIN;
+	for (int i = 0; i < M; i++)
+		for (int j = 0; j < N; j++)
+		{
+			if (i > j && y == 4) // Sub diagonala principala
+			{
+				if (B[i][j] > max)
+					max = B[i][j];
+			}
+
+			if (i + j > M - 1 && y == 6) // Sub diagonala secundara
+			{
+				if (B[i][j] > max)
+					max = B[i][j];
+			}
+		}
+	return max;
+}
 int  main()
 {
-	 
+	int y;
 	int A[100][100];
 	int M, N, i, j;
 	int suma;
-	int minim_sub_dp = INT_MAX;
-	int max_sub_dp = INT_MIN;
-	int min_sub_se = INT_MAX;
-	int max_sub_se = INT_MIN;
+	int minim_sub_dp;
+	int max_sub_dp;
+	int minim_sub_se ;
+	int max_sub_se;
 	time_t t;
 	printf("Numarul de linii : ");
 	scanf("%d", &M);
 	printf("Numarul de coloane : ");
 	scanf("%d", &N);
-
 
 	// generarea valorilor din matrice:
 	srand((unsigned)time(&t));
@@ -25,24 +88,21 @@ int  main()
 	for (i = 0; i < M; i++)
 		for (j = 0; j < N; j++)
 			A[i][j] = rand() % 100;
-
-	printf("\n\nMatricea generata este:\n");
-	for (i = 0; i < M; i++)
-	{
-		for (j = 0; j < N; j++)
-
-			printf("%5d", A[i][j]);
-		printf("\n");
-		printf("\n");
-	}
-	printf("\n");
-	printf("Apasa o tasta pentru a continua!\n");
-	getch();
-
 	int opt;
+	verificare(M, N);
 	do
 	{
-		system("cls"); // sterge ecranul
+		printf("\n\nMatricea generata este:\n");
+
+		for (i = 0; i < M; i++)
+		{
+			for (j = 0; j < N; j++)
+
+				printf("%5d", A[i][j]);
+			printf("\n");
+			printf("\n");
+		}
+		printf("\n");
 		printf("Alegeti optiunea!\n");
 		printf("1. Suma elementelor aflate pe diagonala principala.\n");
 		printf("2. Suma elementelor aflate pe diagonala secundara. \n");
@@ -56,200 +116,42 @@ int  main()
 		switch (opt)
 		{
 		case 1:
-			if (M != N)
-			{
-				printf("Introduceti o matrice patratica!");
-				getch();
-			}
-
-			if (M == N)
-			{
-				suma = 0;
-				for (i = 0; i < M; i++)
-					 
-
-					suma =suma+ A[i][i];
-
+			    y = 1;
+			   suma= suma_diag(M,A,y);
 				printf("Suma elementelor de pe diagonala principala este:%d\n", suma);
-				printf("\n");
-				printf("Matricea:\n");
-				for (i = 0; i < M; i++)
-				{
-					for (j = 0; j < N; j++)
-
-						printf("%5d", A[i][j]);
-					printf("\n");
-					printf("\n");
-				}
-				getch();
-			}
+				getch(); system("cls");	
 			break;
 		case 2:
-			if (M != N)
-			{
-				printf("Introduceti o matrice patratica!");
-				getch();
-			}
-
-
-
-			if (M == N)
-			{
-				suma = 0;
-				for (i = 0; i < M; i++)
-					suma = suma + A[i][M - i - 1];
-
-
-
-			}
-
-			printf("Suma elementelor de pe diagonala secundara este:%d\n", suma);
-			printf("\n");
-			printf("Matricea:\n");
-			for (i = 0; i < M; i++)
-			{
-				for (j = 0; j < N; j++)
-
-					printf("%5d", A[i][j]);
-				printf("\n");
-				printf("\n");
-			}
-			getch();
-
-
-
+			y = 2;
+			suma = suma_diag(M, A, y);
+			 printf("Suma elementelor de pe diagonala secundara este:%d\n", suma);
+			 getch();  system("cls");
 			break;
 		case 3:
-			if (M != N)
-			{
-				printf("Introduceti o matrice patratica!");
-				getch();
-			}
-			else {
-				printf("Elementele de sub diagonala principala sunt:");
-				for (int i = 0; i < M; i++)
-					for (int j = 0; j < N; j++)
-					{
-						if (i > j) // Sub diagonala principala
-						{
-							printf("%d ", A[i][j]);
-							if (A[i][j] < minim_sub_dp)
-								minim_sub_dp = A[i][j];
-						}
-					}
-				printf("\nMinimul este:%d\n", minim_sub_dp);
-
-
-				printf("\nMatricea:\n");
-				for (i = 0; i < M; i++)
-				{
-					for (j = 0; j < N; j++)
-
-						printf("%5d ", A[i][j]);
-					printf("\n");
-					printf("\n");
-				}
-				getch();
-			}
+			y = 3;
+			  minim_sub_dp = min_sub_dp_sec(M,N,A,y);
+			printf("\nMinimul este:%d\n", minim_sub_dp);
+			getch(); system("cls");
+			
 			break;
 		case 4:
-			if (M != N)
-			{
-				printf("Introduceti o matrice patratica!");
-				getch();
-			}
-			else {
-				printf("Elementele de sub diagonala principala sunt:");
-				for (int i = 0; i < M; i++)
-					for (int j = 0; j < N; j++)
-					{
-						if (i > j) // Sub diagonala principala
-						{
-							printf("%d ", A[i][j]);
-							if (A[i][j] > max_sub_dp)
-								max_sub_dp = A[i][j];
-						}
-					}
-				printf("\nMaximul este:%d\n", max_sub_dp);
-
-
-				printf("\nMatricea:\n");
-				for (i = 0; i < M; i++)
-				{
-					for (j = 0; j < N; j++)
-
-						printf("%5d ", A[i][j]);
-					printf("\n");
-					printf("\n");
-				}
-				getch();
-			}
+			y = 4;
+			max_sub_dp = max_sub_dp_sec(M, N, A, y);
+			printf("\nMaximul este:%d\n", max_sub_dp);
+			getch(); system("cls");
+			 
 			break;
 		case 5:
-			if (M != N)
-			{
-				printf("Introduceti o matrice patratica!");
-				getch();
-			}
-			else {
-				printf("Elementele de sub diagonala secundara sunt:");
-				for (int i = 0; i < M; i++)
-					for (int j = 0; j < N; j++)
-					{
-						if (i + j > M - 1) // Sub diagonala secundara
-						{
-							printf("%d ", A[i][j]);
-							if (A[i][j] < min_sub_se)
-								min_sub_se = A[i][j];
-						}
-					}
-				printf("\nMinimul este:%d\n", min_sub_se);
-
-
-				printf("\nMatricea:\n");
-				for (i = 0; i < M; i++)
-				{
-					for (j = 0; j < N; j++)
-
-						printf("%5d ", A[i][j]);
-					printf("\n");
-					printf("\n");
-				}
-				getch();
-			}
+			y = 5;
+			minim_sub_se = min_sub_dp_sec(M, N, A, y);
+			printf("\nMinimul este:%d\n", minim_sub_se);
+			getch(); system("cls");
 			break;
 		case 6:
-			if (M != N)
-			{
-				printf("Introduceti o matrice patratica!");
-				getch();
-			}
-			else {
-				printf("Elementele de sub diagonala principala sunt:");
-				for (int i = 0; i < M; i++)
-					for (int j = 0; j < N; j++)
-					{
-						if (i + j > M - 1) // Sub diagonala secundara
-						{
-							printf("%d ", A[i][j]);
-							if (A[i][j] > max_sub_se)
-								max_sub_se = A[i][j];
-						}
-					}
-				printf("\nMaximul este:%d\n", max_sub_se);
-
-
-				printf("\nMatricea:\n");
-				for (i = 0; i < M; i++)
-				{
-					for (j = 0; j < N; j++)
-
-						printf("%5d ", A[i][j]);
-					printf("\n");
-					printf("\n");
-				}
-				getch();
-			}
+			y = 6;
+			max_sub_se = max_sub_dp_sec(M, N, A, y);
+			printf("\nMaximul este:%d\n", max_sub_se);
+			getch(); system("cls");
 			break;
 
 		case 7: exit(0);
